@@ -1,0 +1,24 @@
+:root {
+	--key-color: rgb(208, 225, 235);
+}
+
+body {
+	background: rgb(198, 220, 226);
+}
+
+#container {
+	background: white;
+	margin: 1em 10%;
+	padding: 0.5em 2em;
+	border-radius: 12px;
+}
+
+h1 {
+	border-top: 4px solid var(--key-color);
+	border-left: 12px solid var(--key-color);
+	padding-left: 4px;
+}
+
+ul {
+	list-style-type: none;
+}
