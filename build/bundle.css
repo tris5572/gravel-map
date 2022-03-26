@@ -1,4 +1,4 @@
-body{margin:0;padding:0}#map.svelte-1bvegn8{height:100vh;width:100vw}.leaflet-tile{filter:saturate(20%) brightness(50%) !important}#information-box.svelte-1bvegn8{position:absolute;left:0;bottom:0;z-index:1001;background:hsla(0, 0%, 100%, 50%);margin:0;padding:4px 8px;font-size:small}/* required styles */
+body{margin:0;padding:0}#map.svelte-fvtxbt{height:100vh;height:100dvh;width:100vw}.leaflet-tile{filter:saturate(20%) brightness(50%) !important}#information-box.svelte-fvtxbt{position:absolute;left:0;bottom:0;z-index:1001;background:hsla(0, 0%, 100%, 50%);margin:0;padding:4px 8px;font-size:small}/* required styles */
 
 .leaflet-pane,
 .leaflet-tile,
