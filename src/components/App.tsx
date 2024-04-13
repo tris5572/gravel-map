@@ -14,6 +14,9 @@ function App() {
         }}
         style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}
         mapStyle="https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json"
+        onClick={(e) => {
+          console.log(e.features);
+        }}
       >
         <GeolocateControl />
         <NavigationControl />

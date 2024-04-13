@@ -1,13 +1,18 @@
-import { Layer, LineLayer, Source, useMap } from 'react-map-gl';
+import { FillLayer, Layer, LineLayer, Source } from 'react-map-gl';
 
 /**
  * 経路を表示するコンポーネント。
  * Map の子要素として配置すること。
  */
 export function RoutesView() {
-  const map = useMap();
+  // const map = useMap();
 
-  return <Line />;
+  return (
+    <>
+      {/* <Line /> */}
+      <Area />
+    </>
+  );
 }
 
 type LineProps = { points?: [number, number][] };
@@ -16,10 +21,10 @@ function Line(props: LineProps) {
   const layer: LineLayer = {
     id: 'line-test',
     type: 'line',
-    source: 'route',
+    interactive: true,
     layout: {},
     paint: {
-      'line-color': 'red',
+      'line-color': '#FF0000AA',
       'line-width': 6,
     },
   };
@@ -37,6 +42,38 @@ function Line(props: LineProps) {
 
   return (
     <Source id="line-layer" type="geojson" data={source}>
+      <Layer {...layer} />
+    </Source>
+  );
+}
+
+function Area() {
+  const layer: FillLayer = {
+    id: 'line-test',
+    type: 'fill',
+    layout: {},
+    paint: {
+      'fill-color': '#AA000055',
+    },
+  };
+  const source: GeoJSON.Feature<GeoJSON.Geometry> = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'Polygon',
+      coordinates: [
+        [
+          [139.7, 35.7],
+          [139.7, 35.6],
+          [139.6, 35.6],
+          [139.6, 35.7],
+          [139.7, 35.7],
+        ],
+      ],
+    },
+  };
+  return (
+    <Source id="area-layer" type="geojson" data={source}>
       <Layer {...layer} />
     </Source>
   );
