@@ -1,4 +1,4 @@
-import { FillLayer, Layer, LineLayer, Source } from 'react-map-gl';
+import { FillLayer, Layer, Source } from 'react-map-gl';
 
 /**
  * 経路を表示するコンポーネント。
@@ -15,37 +15,37 @@ export function RoutesView() {
   );
 }
 
-type LineProps = { points?: [number, number][] };
+// type LineProps = { points?: [number, number][] };
 
-function Line(props: LineProps) {
-  const layer: LineLayer = {
-    id: 'line-test',
-    type: 'line',
-    interactive: true,
-    layout: {},
-    paint: {
-      'line-color': '#FF0000AA',
-      'line-width': 6,
-    },
-  };
-  const source: GeoJSON.Feature<GeoJSON.Geometry> = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: [
-        [139.7345854, 35.7056804],
-        [139.7658193, 35.6708245],
-      ],
-    },
-  };
+// function Line(_props: LineProps) {
+//   const layer: LineLayer = {
+//     id: 'line-test',
+//     type: 'line',
+//     interactive: true,
+//     layout: {},
+//     paint: {
+//       'line-color': '#FF0000AA',
+//       'line-width': 6,
+//     },
+//   };
+//   const source: GeoJSON.Feature<GeoJSON.Geometry> = {
+//     type: 'Feature',
+//     properties: {},
+//     geometry: {
+//       type: 'LineString',
+//       coordinates: [
+//         [139.7345854, 35.7056804],
+//         [139.7658193, 35.6708245],
+//       ],
+//     },
+//   };
 
-  return (
-    <Source id="line-layer" type="geojson" data={source}>
-      <Layer {...layer} />
-    </Source>
-  );
-}
+//   return (
+//     <Source id="line-layer" type="geojson" data={source}>
+//       <Layer {...layer} />
+//     </Source>
+//   );
+// }
 
 function Area() {
   const layer: FillLayer = {
