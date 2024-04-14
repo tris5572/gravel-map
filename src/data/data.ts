@@ -1,5 +1,7 @@
 import { PathLayer } from '@deck.gl/layers';
 
+import type { PickingInfo, MapViewState } from '@deck.gl/core';
+
 type PathData = {
   coordinates: [number, number][];
 };
@@ -37,4 +39,14 @@ export function pathLayers(): PathLayer[] {
   layers.push(layer);
 
   return layers;
+}
+
+export function getTooltip({ object }: PickingInfo) {
+  if (!object) {
+    return null;
+  }
+  // else if(object instanceof PathData){
+
+  // }
+  return JSON.stringify(object);
 }

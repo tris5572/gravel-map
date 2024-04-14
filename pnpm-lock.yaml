@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@deck.gl/core':
+    specifier: ^9.0.7
+    version: 9.0.7
   '@deck.gl/layers':
     specifier: ^9.0.7
     version: 9.0.7(@deck.gl/core@9.0.7)(@loaders.gl/core@4.2.0)(@luma.gl/core@9.0.10)(@luma.gl/engine@9.0.10)

@@ -3,7 +3,7 @@ import Map from 'react-map-gl/maplibre';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './App.css';
-import { pathLayers } from '../data/data';
+import { getTooltip, pathLayers } from '../data/data';
 // import { RoutesView } from './RoutesView';
 
 export function App() {
@@ -20,6 +20,7 @@ export function App() {
         }}
         controller={true}
         layers={paths}
+        getTooltip={getTooltip}
       >
         <Map
           reuseMaps
