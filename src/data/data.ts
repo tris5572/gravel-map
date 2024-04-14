@@ -1,6 +1,6 @@
 import { PathLayer } from '@deck.gl/layers';
 
-import type { PickingInfo, MapViewState } from '@deck.gl/core';
+import type { PickingInfo } from '@deck.gl/core';
 
 type PathData = {
   coordinates: [number, number][];
