@@ -15,15 +15,17 @@ export function getTooltip({ object }: PickingInfo) {
   }
   if (object.kind === 'route-data') {
     const data = object as RouteData;
-    const str = `<b>${data.name}</b> ${'★'.repeat(data.gravel)}<br />${data.description}`;
+    const str = `${'★'.repeat(data.gravel)}<br /><b>${data.name}</b><br />${data.description}`;
     return {
       html: str,
       style: {
         borderRadius: '8px',
         fontSize: 'medium',
-        maxWidth: '30rem',
+        maxWidth: '20rem',
+        minWidth: 'auto',
         background: 'hsla(200, 20, 20, 0.7)',
         padding: '0.3rem 0.8rem 0.4rem',
+        left: '-10rem',
       },
     };
   }
