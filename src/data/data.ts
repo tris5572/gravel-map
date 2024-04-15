@@ -8,6 +8,7 @@ import { colorFromGravelLevel } from './constants';
 
 /**
  * ツールチップを生成する。
+ * className を与えても padding が反映されなかったため、スタイルを直書き。
  */
 export function getTooltip({ object }: PickingInfo) {
   if (!object) {
@@ -20,12 +21,11 @@ export function getTooltip({ object }: PickingInfo) {
       html: str,
       style: {
         borderRadius: '8px',
-        fontSize: 'medium',
-        maxWidth: '20rem',
-        minWidth: 'auto',
+        fontSize: '90%',
+        maxWidth: '18rem',
         background: 'hsla(200, 20, 20, 0.7)',
         padding: '0.3rem 0.8rem 0.4rem',
-        left: '-10rem',
+        left: '-9rem',
       },
     };
   }
