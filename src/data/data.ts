@@ -8,11 +8,24 @@ import { colorFromGravelLevel } from './constants';
 
 /**
  * ツールチップを生成する。
- * TODO: 現時点では仮実装。きちんと実装する。
  */
 export function getTooltip({ object }: PickingInfo) {
   if (!object) {
     return null;
+  }
+  if (object.kind === 'route-data') {
+    const data = object as RouteData;
+    const str = `<b>${data.name}</b> ${'★'.repeat(data.gravel)}<br />${data.description}`;
+    return {
+      html: str,
+      style: {
+        borderRadius: '8px',
+        fontSize: 'medium',
+        maxWidth: '30rem',
+        background: 'hsla(200, 20, 20, 0.7)',
+        padding: '0.3rem 0.8rem 0.4rem',
+      },
+    };
   }
   return JSON.stringify(object);
 }
@@ -56,6 +69,7 @@ type FileRoute = {
  * ルートデータの型
  */
 type RouteData = {
+  kind: 'route-data';
   /** 名前 */
   name: string;
   /** グラベルレベル */
@@ -85,6 +99,7 @@ function parseRouteData(source: FileRoute): RouteData | undefined {
   }
 
   return {
+    kind: 'route-data',
     name: source.name,
     gravel: source.gra,
     width: source.wid,
