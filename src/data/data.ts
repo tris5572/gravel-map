@@ -2,6 +2,7 @@ import { PathLayer } from '@deck.gl/layers';
 import type { PickingInfo } from '@deck.gl/core';
 
 import FILE from './data.json';
+import { colorFromGravelLevel } from './constants';
 
 // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -25,7 +26,7 @@ export function layerFromRouteData(): PathLayer {
   return new PathLayer<RouteData>({
     id: 'route-path',
     data: routeDataFromFile(),
-    getColor: [255, 0, 0, 150],
+    getColor: (d) => colorFromGravelLevel(d.gravel),
     getPath: (d: RouteData) => {
       return d.coordinates;
     },
