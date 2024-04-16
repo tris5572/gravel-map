@@ -11,6 +11,9 @@ dependencies:
   '@deck.gl/layers':
     specifier: ^9.0.7
     version: 9.0.7(@deck.gl/core@9.0.7)(@loaders.gl/core@4.2.0)(@luma.gl/core@9.0.10)(@luma.gl/engine@9.0.10)
+  '@deck.gl/mapbox':
+    specifier: ^9.0.8
+    version: 9.0.8(@deck.gl/core@9.0.7)(@luma.gl/core@9.0.10)
   '@deck.gl/react':
     specifier: ^9.0.7
     version: 9.0.7(@deck.gl/core@9.0.7)(react-dom@18.2.0)(react@18.2.0)
@@ -244,6 +247,18 @@ packages:
 
   /@deck.gl/mapbox@9.0.7(@deck.gl/core@9.0.7)(@luma.gl/core@9.0.10):
     resolution: {integrity: sha512-ik/Gbjnro1tZ4m3n71T0i54BgulQZ/ArFdHc5TH3pMeLMJUhD29YUqk3QfoEdNyEW1FTwC2jwILSayWyaZdWRQ==}
+    peerDependencies:
+      '@deck.gl/core': ^9.0.0
+      '@luma.gl/core': ^9.0.0
+    dependencies:
+      '@deck.gl/core': 9.0.7
+      '@luma.gl/constants': 9.0.10
+      '@luma.gl/core': 9.0.10
+      '@math.gl/web-mercator': 4.0.1
+    dev: false
+
+  /@deck.gl/mapbox@9.0.8(@deck.gl/core@9.0.7)(@luma.gl/core@9.0.10):
+    resolution: {integrity: sha512-lKatwT449QVOUwbNDLViP7pTYjt0CLazyKCldmvvl/te1jHiSRRmVq8UqPP0L7KtML0dyfbI8uAigTqq8oiyHA==}
     peerDependencies:
       '@deck.gl/core': ^9.0.0
       '@luma.gl/core': ^9.0.0
