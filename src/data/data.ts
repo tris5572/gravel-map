@@ -3,12 +3,41 @@ import type { PickingInfo } from '@deck.gl/core';
 
 import FILE from './data.json';
 import { colorFromGravelLevel } from './constants';
+import { isSmartphone } from '../misc/util';
+
+// -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+/**
+ * PCで適用するスタイル。
+ * マウスカーソルの位置に応じて表示する。
+ */
+const PC_STYLE: Partial<CSSStyleDeclaration> = {
+  borderRadius: '8px',
+  maxWidth: '18rem',
+  background: 'hsla(200, 20%, 10%, 0.8)',
+  padding: '0.3rem 0.8rem 0.4rem',
+  left: '-4rem',
+};
+
+/**
+ * スマートフォンで適用するスタイル。
+ * 画面上部中央に表示する。
+ */
+const SP_STYLE: Partial<CSSStyleDeclaration> = {
+  borderRadius: '8px',
+  background: 'hsla(200, 20%, 10%, 0.8)',
+  padding: '0.3rem 0.8rem 0.4rem',
+  transform: 'translate(0, 0)',
+  top: '1rem',
+  left: '10%',
+  marginRight: '15%',
+};
 
 // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
 /**
  * ツールチップを生成する。
- * className を与えても padding が反映されなかったため、スタイルを直書き。
+ * className でスタイルを与えても padding だけは反映されなかったため、スタイルを直書き。
  */
 export function getTooltip({ object }: PickingInfo) {
   if (!object) {
@@ -17,16 +46,11 @@ export function getTooltip({ object }: PickingInfo) {
   if (object.kind === 'route-data') {
     const data = object as RouteData;
     const str = `${'★'.repeat(data.gravel)}<br /><b>${data.name}</b><br />${data.description}`;
+    // className で指定しても display と transform はデフォルトが優先されるので、 style として指定。
+    // @see https://github.com/visgl/deck.gl/blob/fa029dddebc43f350cef07cf8e9fe86d98415c02/modules/core/src/lib/tooltip.ts#L93
     return {
       html: str,
-      style: {
-        borderRadius: '8px',
-        fontSize: '90%',
-        maxWidth: '18rem',
-        background: 'hsla(200, 20, 20, 0.7)',
-        padding: '0.3rem 0.8rem 0.4rem',
-        left: '-9rem',
-      },
+      style: isSmartphone() ? SP_STYLE : PC_STYLE,
     };
   }
   return JSON.stringify(object);
