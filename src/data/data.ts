@@ -70,8 +70,9 @@ export function layerFromRouteData(): PathLayer {
       return d.coordinates;
     },
     getWidth: 10,
+    widthUnits: 'meters',
+    widthMinPixels: 4,
     pickable: true,
-    widthUnits: 'pixels',
     capRounded: true,
     jointRounded: true,
   });

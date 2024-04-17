@@ -32,7 +32,7 @@ export function App() {
         <NavigationControl />
         <GeolocateControl />
         <ScaleControl />
-        <DeckGLOverlay layers={[layerFromRouteData()]} getTooltip={getTooltip} />
+        <DeckGLOverlay layers={[layerFromRouteData()]} getTooltip={getTooltip} pickingRadius={8} />
       </Map>
     </div>
   );
