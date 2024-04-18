@@ -37,6 +37,8 @@ const SP_STYLE: Partial<CSSStyleDeclaration> = {
   marginRight: '15%',
 };
 
+// -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
 /**
  * MapLibre のコントロールを有効化するためのオーバーレイ
  *
@@ -44,7 +46,8 @@ const SP_STYLE: Partial<CSSStyleDeclaration> = {
  * @see https://deck.gl/docs/api-reference/mapbox/mapbox-overlay
  */
 function DeckGLOverlay(props: DeckProps) {
-  const setSelected = useAppState((st) => st.setSelected);
+  // const setSelected = useAppState((st) => st.setSelected);
+  const [selectedData, setSelectedData] = useAppState((st) => [st.selectedData, st.setSelectedData]);
 
   /**
    * ツールチップを生成する。
@@ -58,7 +61,8 @@ function DeckGLOverlay(props: DeckProps) {
     if (object.kind === 'route-data') {
       const data = object as RouteData;
       const str = `${'★'.repeat(data.gravel)}<br /><b>${data.name}</b><br />${data.description}`;
-      setSelected(keyFromData(data));
+      setSelectedData(data);
+
       // className で指定しても display と transform はデフォルトが優先されるので、 style として指定。
       // @see https://github.com/visgl/deck.gl/blob/fa029dddebc43f350cef07cf8e9fe86d98415c02/modules/core/src/lib/tooltip.ts#L93
       return {
@@ -70,11 +74,12 @@ function DeckGLOverlay(props: DeckProps) {
   }
 
   const data = useAppState((st) => st.data);
-  const layer = useMemo(() => pathLayerFromData(data), [data]);
-  // console.log(data);
+  const mainLayer = useMemo(() => pathLayerFromData(data), [data]);
+
+  const selectedLayer = selectedData ? pathLayerFromData(selectedData, true) : null;
 
   const overlay = useControl<MapboxOverlay>(() => new MapboxOverlay(props));
-  overlay.setProps({ ...props, getTooltip, layers: [layer] });
+  overlay.setProps({ ...props, getTooltip, layers: [mainLayer, selectedLayer] });
   return null;
 }
 

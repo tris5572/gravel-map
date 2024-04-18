@@ -30,17 +30,17 @@ export function layerFromRouteData(): PathLayer {
   });
 }
 
-export function pathLayerFromData(data: RouteData[]) {
+export function pathLayerFromData(data: RouteData | RouteData[], isSelected: boolean = false) {
   return new PathLayer<RouteData>({
     id: 'route-path',
-    data: data,
+    data: Array.isArray(data) ? data : [data],
     getColor: (d) => colorFromGravelLevel(d.gravel),
     getPath: (d: RouteData) => {
       return d.coordinates;
     },
-    getWidth: (d) => (d.isSelected ? 500 : 10),
+    getWidth: isSelected ? 40 : 10,
     widthUnits: 'meters',
-    widthMinPixels: 4,
+    widthMinPixels: isSelected ? 8 : 4,
     pickable: true,
     capRounded: true,
     jointRounded: true,
