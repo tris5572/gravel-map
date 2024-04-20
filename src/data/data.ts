@@ -80,7 +80,6 @@ export type RouteData = {
   description: string;
   /** 座標の並び */
   coordinates: [number, number][];
-  isSelected: boolean;
 };
 
 /**
@@ -106,7 +105,6 @@ function parseRouteData(source: FileRoute): RouteData | undefined {
     slope: source.slp,
     description: source.desc,
     coordinates,
-    isSelected: false,
   };
 }
 
