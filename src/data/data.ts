@@ -1,35 +1,36 @@
 import { PathLayer } from '@deck.gl/layers';
-import type { PickingInfo } from '@deck.gl/core';
 
-import FILE from './data.json';
 import { colorFromGravelLevel } from './constants';
-import { isSmartphone } from '../misc/util';
-import { useAppState } from '../misc/store';
-
-// -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+import FILE from './data.json';
 
 // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
 /**
  * ファイルのデータを元に、レイヤーを生成する。
  */
-export function layerFromRouteData(): PathLayer {
-  return new PathLayer<RouteData>({
-    id: 'route-path',
-    data: routeDataFromFile(),
-    getColor: (d) => colorFromGravelLevel(d.gravel),
-    getPath: (d: RouteData) => {
-      return d.coordinates;
-    },
-    getWidth: (d) => (d.isSelected ? 500 : 10),
-    widthUnits: 'meters',
-    widthMinPixels: 4,
-    pickable: true,
-    capRounded: true,
-    jointRounded: true,
-  });
-}
+// export function layerFromRouteData(): PathLayer {
+//   return new PathLayer<RouteData>({
+//     id: 'route-path',
+//     data: routeDataFromFile(),
+//     getColor: (d) => colorFromGravelLevel(d.gravel),
+//     getPath: (d: RouteData) => {
+//       return d.coordinates;
+//     },
+//     getWidth: (d) => (d.isSelected ? 500 : 10),
+//     widthUnits: 'meters',
+//     widthMinPixels: 4,
+//     pickable: true,
+//     capRounded: true,
+//     jointRounded: true,
+//   });
+// }
 
+/**
+ * 渡されたデータを元に PathLayer を生成する。
+ * @param data ルートデータ。配列 or 1つ。
+ * @param isSelected 選択状態かどうかのフラグ。選択されていると太く表示する。
+ * @returns PathLayer
+ */
 export function pathLayerFromData(data: RouteData | RouteData[], isSelected: boolean = false) {
   return new PathLayer<RouteData>({
     id: 'route-path',
@@ -126,9 +127,20 @@ export function routeDataFromFile(): RouteData[] {
   return list;
 }
 
+/**
+ * ルートデータのキーを生成する
+ */
 export function keyFromData(data: RouteData): string {
-  return `${data.name}-${data.coordinates[0][0]}`;
+  // データは 経度-緯度 の順
+  return `${data.name}-${data.coordinates[0][1]}`;
 }
+
+/**
+ * ルートデータのキーを、ファイルから読み取ったデータを元に生成する。
+ * データ読込時のみに使用する。
+ * 生成されるキーを `keyFromData()` と合わせる必要がある。
+ */
 function keyFromFileRoute(data: FileRoute): string {
-  return `${data.name}-${data.cods[0][1]}`;
+  // ファイルの中身は 緯度-経度 の順
+  return `${data.name}-${data.cods[0][0]}`;
 }

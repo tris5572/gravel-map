@@ -1,13 +1,13 @@
+import { useMemo } from 'react';
 import Map, { GeolocateControl, NavigationControl, ScaleControl, useControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { DeckProps, PickingInfo } from '@deck.gl/core';
 import { MapboxOverlay } from '@deck.gl/mapbox';
-import { RouteData, keyFromData, layerFromRouteData, pathLayerFromData } from '../data/data';
 import './App.css';
-import { useEffect, useMemo, useState } from 'react';
+
 import { useAppState } from '../misc/store';
+import { RouteData, pathLayerFromData } from '../data/data';
 import { isSmartphone } from '../misc/util';
-import { PathLayer } from '@deck.gl/layers';
 
 // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -46,23 +46,21 @@ const SP_STYLE: Partial<CSSStyleDeclaration> = {
  * @see https://deck.gl/docs/api-reference/mapbox/mapbox-overlay
  */
 function DeckGLOverlay(props: DeckProps) {
-  // const setSelected = useAppState((st) => st.setSelected);
   const [selectedData, setSelectedData] = useAppState((st) => [st.selectedData, st.setSelectedData]);
 
   /**
    * ツールチップを生成する。
+   * ホバー・タップ判定時に zustand で管理されるアプリのステートにアクセスするため、コンポーネント内に記述。
    * className でスタイルを与えても padding だけは反映されなかったため、スタイルを直書き。
    */
   function getTooltip({ object }: PickingInfo) {
     if (!object) {
       return null;
     }
-
     if (object.kind === 'route-data') {
       const data = object as RouteData;
       const str = `${'★'.repeat(data.gravel)}<br /><b>${data.name}</b><br />${data.description}`;
-      setSelectedData(data);
-
+      setSelectedData(data); // 選択されている線を太くする
       // className で指定しても display と transform はデフォルトが優先されるので、 style として指定。
       // @see https://github.com/visgl/deck.gl/blob/fa029dddebc43f350cef07cf8e9fe86d98415c02/modules/core/src/lib/tooltip.ts#L93
       return {
@@ -70,7 +68,7 @@ function DeckGLOverlay(props: DeckProps) {
         style: isSmartphone() ? SP_STYLE : PC_STYLE,
       };
     }
-    return null; //JSON.stringify(object);
+    return null;
   }
 
   const data = useAppState((st) => st.data);
@@ -79,16 +77,14 @@ function DeckGLOverlay(props: DeckProps) {
   const selectedLayer = selectedData ? pathLayerFromData(selectedData, true) : null;
 
   const overlay = useControl<MapboxOverlay>(() => new MapboxOverlay(props));
-  overlay.setProps({ ...props, getTooltip, layers: [mainLayer, selectedLayer] });
+  overlay.setProps({ ...props, getTooltip, layers: [mainLayer, selectedLayer], pickingRadius: 8 });
   return null;
 }
 
+/**
+ * アプリのメインコンポーネント
+ */
 export function App() {
-  // const [flag, setFlag] = useState(false);
-  // useEffect(() => {
-  //   setFlag(updateFlag);
-  // }, [updateFlag]);
-
   return (
     <div style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}>
       <Map
@@ -103,10 +99,7 @@ export function App() {
         <NavigationControl />
         <GeolocateControl />
         <ScaleControl />
-        <DeckGLOverlay
-          //  layers={[layerFromRouteData()]}
-          pickingRadius={8}
-        />
+        <DeckGLOverlay />
       </Map>
     </div>
   );
