@@ -1,33 +1,19 @@
-# React + TypeScript + Vite
+# グラベルマップ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+グラベルマップは、自転車・グラベルロードで走れるグラベル（未舗装路）を地図にマッピングした Web アプリです。
 
-Currently, two official plugins are available:
+https://tris5572.github.io/gravel-map/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ルートについて
 
-## Expanding the ESLint configuration
+記載のルートは作者が走った記録を元にマッピングしており、現時点では関東平野南部のデータがほとんどです。
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+各ルートにはパリ・ルーベを参考にしたグラベルレベル（星）により、道の走りにくさを色で示しています。
 
-- Configure the top-level `parserOptions` property like this:
+- ★　　　　：青　耐パンク性の高いタイヤを履いたロードバイクでも走行できる。細かい砂、等。
+- ★★　　　：緑　グラベルロードで走りやすい。浅い砂利、土、草、等。
+- ★★★　　：橙　グラベルロードで走りにくい。深い砂利、緩い土、等。
+- ★★★★　：赤　MTBの方が向いている。深い凸凹、大きめの石、等。
+- ★★★★★：紫　自転車で走るのに向かない。
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-
-pnpm i "@deck.gl/react"
+ただしこのレベルは作者の主観であり、また道の整備や季節によって大きく変動するため、参考レベルです。
