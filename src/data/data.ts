@@ -33,7 +33,7 @@ import FILE from './data.json';
  */
 export function pathLayerFromData(data: RouteData | RouteData[], isSelected: boolean = false) {
   return new PathLayer<RouteData>({
-    id: 'route-path',
+    id: `route-path-${isSelected && 'selected'}`,
     data: Array.isArray(data) ? data : [data],
     getColor: (d) => colorFromGravelLevel(d.gravel),
     getPath: (d: RouteData) => {
