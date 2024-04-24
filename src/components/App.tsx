@@ -8,6 +8,7 @@ import './App.css';
 import { useAppState } from '../misc/store';
 import { RouteData, pathLayerFromData } from '../data/data';
 import { isSmartphone } from '../misc/util';
+import { GitHub } from './GitHub';
 
 // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 
@@ -86,21 +87,24 @@ function DeckGLOverlay(props: DeckProps) {
  */
 export function App() {
   return (
-    <div style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}>
-      <Map
-        reuseMaps
-        initialViewState={{
-          longitude: 139.54,
-          latitude: 35.74,
-          zoom: 9,
-        }}
-        mapStyle="https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json"
-      >
-        <NavigationControl />
-        <GeolocateControl />
-        <ScaleControl />
-        <DeckGLOverlay />
-      </Map>
-    </div>
+    <>
+      <div style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}>
+        <Map
+          reuseMaps
+          initialViewState={{
+            longitude: 139.54,
+            latitude: 35.74,
+            zoom: 9,
+          }}
+          mapStyle="https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json"
+        >
+          <NavigationControl />
+          <GeolocateControl />
+          <ScaleControl />
+          <DeckGLOverlay />
+        </Map>
+        <GitHub />
+      </div>
+    </>
   );
 }
