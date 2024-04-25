@@ -17,3 +17,27 @@ https://tris5572.github.io/gravel-map/
 |★★★|橙|グラベルロードで走りにくい。深い砂利、浅い凹凸、緩い土 等|
 |★★★★|赤|MTBの方が向いている。緩い砂利、深い凸凹、大きめの石 等|
 |★★★★★|紫|自転車で走るのに向かない|
+
+
+## 開発時のコマンド類
+
+事前に `pnpm` の導入が必要です。
+
+### ローカルプレビュー
+
+```sh
+pnpm run dev  # or `pnpm dev`
+```
+
+### テスト
+
+今のところテストはありません……。
+
+### デプロイ
+
+[完成版](https://tris5572.github.io/gravel-map/)は GitHub Actions を使って GitHub Pages にデプロイしているため、このリポジトリでデプロイする際は `push` するだけで、他にやることはありません。
+
+デプロイ関連の設定はこのあたりにあります。
+
+- https://github.com/tris5572/gravel-map/blob/main/.github/workflows/deploy.yml
+- https://github.com/tris5572/gravel-map/blob/main/vite.config.ts
