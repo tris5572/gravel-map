@@ -96,7 +96,7 @@ export function App() {
             latitude: 35.74,
             zoom: 9,
           }}
-          mapStyle="https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json"
+          mapStyle={`${import.meta.env.BASE_URL}style.json`}
         >
           <NavigationControl />
           <GeolocateControl />
