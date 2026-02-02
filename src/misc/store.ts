@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { RouteData, routeDataFromFile } from '../data/data';
+import { type RouteData, routeDataFromFile } from '../data/data';
 
 type AppState = {
   /**

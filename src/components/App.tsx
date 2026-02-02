@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
-import Map, { GeolocateControl, NavigationControl, ScaleControl, useControl } from 'react-map-gl/maplibre';
+import MaplibreMap, { GeolocateControl, NavigationControl, ScaleControl, useControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { DeckProps, PickingInfo } from '@deck.gl/core';
+import type { DeckProps, PickingInfo } from '@deck.gl/core';
 import { MapboxOverlay } from '@deck.gl/mapbox';
 import './App.css';
 
+import { pathLayerFromData, type RouteData } from '../data/data';
 import { useAppState } from '../misc/store';
-import { RouteData, pathLayerFromData } from '../data/data';
 import { isSmartphone } from '../misc/util';
 import { GitHub } from './GitHub';
 
@@ -87,24 +87,22 @@ function DeckGLOverlay(props: DeckProps) {
  */
 export function App() {
   return (
-    <>
-      <div style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}>
-        <Map
-          reuseMaps
-          initialViewState={{
-            longitude: 139.54,
-            latitude: 35.74,
-            zoom: 9,
-          }}
-          mapStyle={`${import.meta.env.BASE_URL}style.json`}
-        >
-          <NavigationControl />
-          <GeolocateControl />
-          <ScaleControl />
-          <DeckGLOverlay />
-        </Map>
-        <GitHub />
-      </div>
-    </>
+    <div style={{ width: '100dvw', height: '100dvh', position: 'absolute', left: 0, top: 0 }}>
+      <MaplibreMap
+        reuseMaps
+        initialViewState={{
+          longitude: 139.54,
+          latitude: 35.74,
+          zoom: 9,
+        }}
+        mapStyle={`${import.meta.env.BASE_URL}style.json`}
+      >
+        <NavigationControl />
+        <GeolocateControl />
+        <ScaleControl />
+        <DeckGLOverlay />
+      </MaplibreMap>
+      <GitHub />
+    </div>
   );
 }

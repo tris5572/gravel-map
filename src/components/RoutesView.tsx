@@ -1,4 +1,4 @@
-import { FillLayer, Layer, Source } from 'react-map-gl';
+import { type FillLayer, Layer, Source } from 'react-map-gl';
 
 /**
  * 経路を表示するコンポーネント。
