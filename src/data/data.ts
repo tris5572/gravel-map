@@ -1,5 +1,4 @@
 import { PathLayer } from '@deck.gl/layers';
-
 import { colorFromGravelLevel } from './constants';
 import FILE from './data.json';
 
